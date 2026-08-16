@@ -20,9 +20,9 @@
 
 const VIDEOS = [
   {
-    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    title: "Sample Video Title Yahan Likho",
-    category: "Entertainment",
+    url: "https://multimovies.motorcycles/movies/satluj/
+    title: " you can watch this movie and download on 720P HD "
+    category: "MOVIE",
     date: "2026-08-15"
   },
   {
