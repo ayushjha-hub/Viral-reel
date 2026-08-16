@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Movie2you— Curated Video Shelf</title>
+<title>AJ MOVIE HUB — Free Curated Video Shelf</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -288,14 +288,81 @@
   @media (prefers-reduced-motion: reduce){
     .card, .play-badge{ transition: none; }
   }
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    padding: 48px 24px 40px;
+  }
+
+  .footer-inner{
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
+  }
+
+  .footer-brand .eyebrow{ margin-bottom: 10px; }
+
+  .footer-brand-name{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .footer-brand p{
+    color: var(--text-dim);
+    font-size: 13.5px;
+    line-height: 1.6;
+    max-width: 320px;
+  }
+
+  .footer-col h3{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  .footer-col p, .footer-col a{
+    display: block;
+    color: var(--text-dim);
+    font-size: 13.5px;
+    line-height: 1.9;
+    text-decoration: none;
+  }
+
+  .footer-col a:hover{ color: var(--teal); }
+
+  .footer-bottom{
+    max-width: 1100px;
+    margin: 36px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 12.5px;
+    color: var(--text-dim);
+  }
+
+  .footer-bottom .owner{ color: var(--text); font-weight: 500; }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="eyebrow">Curated · Not uploaded</div>
-  <h1>Reel</h1>
-  <p class="tagline">Har video yahan se chuna gaya hai, khud share nahi kiya gaya — click karo aur seedha yahin dekho.</p>
+  <div class="eyebrow">Curated · Free For You</div>
+  <h1>AJ MOVIE HUB</h1>
+  <p class="tagline">Har video yahan se chuna gaya hai, khud share nahi kiya gaya — click karo aur seedha yahin dekho. Bilkul free.</p>
 </header>
 
 <div class="filter-bar" id="filterBar"></div>
@@ -317,6 +384,37 @@
     </div>
   </div>
 </div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="eyebrow">AJ MOVIE HUB</div>
+      <div class="footer-brand-name">Free For You</div>
+      <p>Ek curated video shelf — har link kahin aur se hai, hum sirf ek jagah organize karke dikhate hain.</p>
+    </div>
+
+    <div class="footer-col">
+      <h3>About</h3>
+      <p>AJ Movie Hub ek free, curated collection hai jahan videos ke links jama karke ek jagah dikhaye jaate hain. Koi video yahan upload nahi hoti — sirf embed/link kiya jaata hai.</p>
+    </div>
+
+    <div class="footer-col">
+      <h3>Contact</h3>
+      <a href="mailto:jha7576770@gmail.com">jha7576770@gmail.com</a>
+    </div>
+
+    <div class="footer-col">
+      <h3>Complaint / Report</h3>
+      <p>Koi link galat, copyrighted ya inappropriate lage to turant email karo:</p>
+      <a href="mailto:jha7576770@gmail.com">jha7576770@gmail.com</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 AJ MOVIE HUB — <span class="owner">AYUSH JHA DEV HUB</span></span>
+    <span>Free for you, always.</span>
+  </div>
+</footer>
 
 <script src="videos.js"></script>
 <script>
