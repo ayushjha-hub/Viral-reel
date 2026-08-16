@@ -20,12 +20,6 @@
 
 const VIDEOS = [
   {
-    url: "https://multimovies.motorcycles/movies/satluj/
-    title: " you can watch this movie and download on 720P HD "
-    category: "MOVIE",
-    date: "2026-08-15"
-  },
-  {
     url: "https://www.youtube.com/watch?v=jNQXAC9IVRw",
     title: "Doosra Sample Video",
     category: "Tech",
@@ -37,4 +31,4 @@ const VIDEOS = [
     category: "Music",
     date: "2026-08-13"
   }
-]; url: https://multimovies.motorcycles/movies/satluj/
+];
