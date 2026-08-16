@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reel — Curated Video Shelf</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #14171C;
+    --card: #1E222A;
+    --card-hover: #262B35;
+    --gold: #FFC857;
+    --teal: #5EEAD4;
+    --text: #F5F5F0;
+    --text-dim: #9AA0AC;
+    --border: #2A2F39;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    padding: 48px 24px 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .eyebrow{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  h1{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .tagline{
+    color: var(--text-dim);
+    font-size: 16px;
+    margin-top: 12px;
+    max-width: 480px;
+  }
+
+  /* ---------- Filter bar ---------- */
+  .filter-bar{
+    max-width: 1100px;
+    margin: 24px auto 0;
+    padding: 0 24px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .chip{
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-dim);
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 7px 16px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .chip:hover{ color: var(--text); border-color: var(--teal); }
+
+  .chip.active{
+    color: var(--bg);
+    background: var(--teal);
+    border-color: var(--teal);
+  }
+
+  /* ---------- Grid ---------- */
+  main{
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+  }
+
+  .grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .card{
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    position: relative;
+  }
+
+  .card:hover{
+    transform: translateY(-4px);
+    border-color: var(--gold);
+    background: var(--card-hover);
+  }
+
+  .card:focus-visible{
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+
+  .thumb-wrap{
+    position: relative;
+    aspect-ratio: 16/9;
+    background: #0B0D10;
+    overflow: hidden;
+  }
+
+  .thumb-wrap img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .thumb-fallback{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-dim);
+    background: linear-gradient(135deg, #1E222A, #14171C);
+  }
+
+  .index-tag{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    background: rgba(20,23,28,0.85);
+    color: var(--gold);
+    padding: 3px 9px;
+    border-radius: 6px;
+    letter-spacing: 0.04em;
+  }
+
+  .play-badge{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.18s ease;
+    background: rgba(20,23,28,0.35);
+  }
+
+  .card:hover .play-badge{ opacity: 1; }
+
+  .play-badge svg{
+    width: 46px;
+    height: 46px;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+  }
+
+  .card-body{
+    padding: 14px 16px 16px;
+  }
+
+  .card-title{
+    font-size: 14.5px;
+    font-weight: 600;
+    line-height: 1.35;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-meta{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  .category-tag{
+    color: var(--teal);
+    font-weight: 500;
+  }
+
+  .empty{
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--text-dim);
+  }
+
+  .empty strong{ color: var(--text); display:block; margin-bottom: 8px; font-size: 18px; }
+
+  /* ---------- Modal ---------- */
+  .modal-overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(10,11,14,0.88);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 24px;
+  }
+
+  .modal-overlay.open{ display: flex; }
+
+  .modal{
+    width: 100%;
+    max-width: 860px;
+  }
+
+  .modal-frame-wrap{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .modal-frame-wrap iframe{
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .modal-footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    gap: 16px;
+  }
+
+  .modal-title{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+  }
+
+  .close-btn{
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 9px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .close-btn:hover{ border-color: var(--gold); }
+
+  @media (prefers-reduced-motion: reduce){
+    .card, .play-badge{ transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Curated · Not uploaded</div>
+  <h1>Reel</h1>
+  <p class="tagline">Har video yahan se chuna gaya hai, khud share nahi kiya gaya — click karo aur seedha yahin dekho.</p>
+</header>
+
+<div class="filter-bar" id="filterBar"></div>
+
+<main>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="emptyState" style="display:none;">
+    <strong>Is category me abhi kuch nahi hai</strong>
+    Koi doosri category try karo.
+  </div>
+</main>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-frame-wrap" id="frameWrap"></div>
+    <div class="modal-footer">
+      <div class="modal-title" id="modalTitle"></div>
+      <button class="close-btn" id="closeBtn">Band karo</button>
+    </div>
+  </div>
+</div>
+
+<script src="videos.js"></script>
+<script>
+  const grid = document.getElementById('grid');
+  const filterBar = document.getElementById('filterBar');
+  const emptyState = document.getElementById('emptyState');
+  const modalOverlay = document.getElementById('modalOverlay');
+  const frameWrap = document.getElementById('frameWrap');
+  const modalTitle = document.getElementById('modalTitle');
+  const closeBtn = document.getElementById('closeBtn');
+
+  let activeCategory = 'All';
+
+  function playIcon(){
+    return `<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#FFC857"/><path d="M9.5 7.5L16.5 12L9.5 16.5V7.5Z" fill="#14171C"/></svg>`;
+  }
+
+  const EXTERNAL_ICON = `<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#5EEAD4"/><path d="M9 15L15 9M15 9H10M15 9V14" stroke="#14171C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+  // Works out what kind of link this is and how to show it.
+  function parseSource(url){
+    try{
+      const u = new URL(url);
+      const host = u.hostname.replace('www.', '');
+
+      if(host === 'youtube.com' || host === 'm.youtube.com'){
+        const id = u.searchParams.get('v') || u.pathname.split('/').pop();
+        if(id) return { kind: 'youtube', id, thumb: `https://img.youtube.com/vi/${id}/hqdefault.jpg` };
+      }
+      if(host === 'youtu.be'){
+        const id = u.pathname.replace('/', '');
+        if(id) return { kind: 'youtube', id, thumb: `https://img.youtube.com/vi/${id}/hqdefault.jpg` };
+      }
+      if(host === 'vimeo.com'){
+        const id = u.pathname.split('/').filter(Boolean).pop();
+        if(id) return { kind: 'vimeo', id, thumb: null };
+      }
+    }catch(e){ /* invalid URL, fall through */ }
+
+    return { kind: 'external', url, thumb: null };
+  }
+
+  function render(){
+    const categories = ['All', ...new Set(VIDEOS.map(v => v.category))];
+    filterBar.innerHTML = categories.map(c =>
+      `<button class="chip ${c === activeCategory ? 'active' : ''}" data-cat="${c}">${c}</button>`
+    ).join('');
+
+    const list = activeCategory === 'All'
+      ? VIDEOS
+      : VIDEOS.filter(v => v.category === activeCategory);
+
+    if(list.length === 0){
+      grid.innerHTML = '';
+      emptyState.style.display = 'block';
+      return;
+    }
+    emptyState.style.display = 'none';
+
+    grid.innerHTML = list.map((v, i) => {
+      const src = parseSource(v.url);
+      const thumbHtml = src.thumb
+        ? `<img src="${src.thumb}" alt="${escapeHtml(v.title)}" loading="lazy">`
+        : `<div class="thumb-fallback">${src.kind === 'vimeo' ? 'Vimeo' : 'Link'}</div>`;
+      const badge = src.kind === 'external' ? EXTERNAL_ICON : playIcon();
+
+      return `
+      <div class="card" tabindex="0" data-url="${escapeHtml(v.url)}" data-title="${escapeHtml(v.title)}">
+        <div class="thumb-wrap">
+          <span class="index-tag">No. ${String(list.length - i).padStart(3,'0')}</span>
+          ${thumbHtml}
+          <div class="play-badge">${badge}</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">${escapeHtml(v.title)}</div>
+          <div class="card-meta">
+            <span class="category-tag">${v.category}</span>
+            <span>${v.date}</span>
+          </div>
+        </div>
+      </div>
+    `;
+    }).join('');
+  }
+
+  function escapeHtml(str){
+    const d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
+  }
+
+  function openModal(url, title){
+    const src = parseSource(url);
+
+    if(src.kind === 'external'){
+      // No official embed available for this site — open it directly instead.
+      window.open(src.url, '_blank', 'noopener');
+      return;
+    }
+
+    const embedSrc = src.kind === 'youtube'
+      ? `https://www.youtube.com/embed/${src.id}?autoplay=1`
+      : `https://player.vimeo.com/video/${src.id}?autoplay=1`;
+
+    frameWrap.innerHTML = `<iframe src="${embedSrc}" title="${escapeHtml(title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    modalTitle.textContent = title;
+    modalOverlay.classList.add('open');
+  }
+
+  function closeModal(){
+    modalOverlay.classList.remove('open');
+    frameWrap.innerHTML = '';
+  }
+
+  filterBar.addEventListener('click', e => {
+    const btn = e.target.closest('.chip');
+    if(!btn) return;
+    activeCategory = btn.dataset.cat;
+    render();
+  });
+
+  grid.addEventListener('click', e => {
+    const card = e.target.closest('.card');
+    if(!card) return;
+    openModal(card.dataset.url, card.dataset.title);
+  });
+
+  grid.addEventListener('keydown', e => {
+    if(e.key !== 'Enter' && e.key !== ' ') return;
+    const card = e.target.closest('.card');
+    if(!card) return;
+    e.preventDefault();
+    openModal(card.dataset.url, card.dataset.title);
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', e => {
+    if(e.target === modalOverlay) closeModal();
+  });
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape') closeModal();
+  });
+
+  render();
+</script>
+
+</body>
+</html>
