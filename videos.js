@@ -12,9 +12,9 @@ const VIDEOS = [
     date: "2026-08-15"
   },
   {
-    url: "https://vimeo.com/76979871",
-    title: "Teesra Sample Video (Vimeo)",
-    category: "Music",
+    url: "https://fffast.filesdl.in/zdownload.php?id=Y3hubteLXZQE884fDOwMsawQAzWH95awK1IsA475tpsm_XvsdpTOsOA2sPM4Km5-sNh8vERwtfWS0YeOB6dYYT7Crc04r678bKnWAAbKymsHRAwxBItQxyVoe6wxNaQvtTWTVGkfJ88cmNoRMN-fdPcxuemUug616OevN5G77z357QNlTo4z-BhnQTMYsp2SZQB372fafIWhXXP7469BLo3CXQKdbUwi_ZD2TFtfQg&token=MTc4Njg4ODE5OC40ZTE3MDI3MmQ3M2NmNzc2YWVmMjYwNWMyZDRhMWU1MDdhMGJkOTg1ZWIzMWE3ZmU1MWE1MWViMzJiMTMyOTYw",
+    title: "OPERATION SAFED SAGAR DOWNLOAD 720P",
+    category: "WEBSERIES (NETFLIX)",
     date: "2026-08-13"
   }
 ];
