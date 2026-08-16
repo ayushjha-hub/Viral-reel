@@ -1,8 +1,8 @@
 const VIDEOS = [
   {
     url: "https://youtu.be/A3AdQ0Pnbak",
-    title: "Video ka naam yahan likho",
-    category: "Category naam",
+    title: "Ayush jha",
+    category: "technology",
     date: "2026-08-16"
   },
   {
